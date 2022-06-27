@@ -169,7 +169,7 @@
 														echo 'No data';
 													}?></td>
 													<td><?php 
-													
+													 
 													//echo $p['status'] 
 													$orders = $p['orderid'];
 													$cekkonfirmasipembayaran = mysqli_query($conn,"select * from konfirmasi where orderid='$orders'");

@@ -42,7 +42,24 @@ if(isset($_POST['selesai']))
 		}
 		
 	};
-
+if(isset($_POST['pembayaranbelumditerima']))
+	{
+		$updatestatus = mysqli_query($conn,"update cart set status='Payment' where orderid='$orderids'");
+		
+		
+		if($updatestatus){
+			echo " <div class='alert alert-success'>
+			<center>Pesanan belum dibayar.</center>
+		  </div>
+		<meta http-equiv='refresh' content='1; url= manageorder.php'/>  ";
+		} else {
+			echo "<div class='alert alert-warning'>
+			Gagal Submit, silakan coba lagi
+		  </div>
+		 <meta http-equiv='refresh' content='1; url= manageorder.php'/> ";
+		}
+		
+	};
 ?>
  
 <!doctype html>
@@ -284,6 +301,9 @@ if(isset($_POST['selesai']))
 									}
 									?>
 									<br>
+									<form method="post">
+									<input type="submit" name="pembayaranbelumditerima" class="form-control btn btn-primary" value="Pembayaran Belum Diterima" \>
+									</form>
                                 </div>
 						
                             </div>

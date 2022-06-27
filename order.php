@@ -281,8 +281,8 @@ if(isset($_POST["update"])){
 					</ul>
 				</div>
 				<div class="checkout-right-basket">
-					<a href="index.php"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Continue Shopping</a>
-					<a href="checkout.php"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>Checkout</a>
+				<a href="index.php"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Lanjut Berbelanja</a>
+				<a href="daftarorder.php"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>Kembali</a>
 				</div>
 				<div class="clearfix"> </div>
 			</div>
