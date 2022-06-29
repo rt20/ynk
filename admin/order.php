@@ -261,36 +261,41 @@ if(isset($_POST['pembayaranbelumditerima']))
 									<br>
 									<?php
 									
+
+									$ambilinfo = mysqli_query($conn,"select * from konfirmasi where orderid='$orderids'");
+									while($tarik=mysqli_fetch_array($ambilinfo)){		
+									$met = $tarik['payment'];
+									$namarek = $tarik['namarekening'];
+									$tglb = $tarik['tglbayar'];
+									echo '
+									Informasi Pembayaran
+								<div class="data-tables datatable-dark">
+								<table id="dataTable2" class="display" style="width:100%"><thead class="thead-dark">
+										<tr>
+											<th>Metode</th>
+											<th>Pemilik Rekening</th>
+											<th>Tanggal Pembayaran</th>
+											
+										</tr></thead><tbody>
+										<tr>
+										<td>'.$met.'</td>
+										<td>'.$namarek.'</td>
+										<td>'.$tglb.'</td>
+										</tr>
+										</tbody>
+									</table>
+								</div> ';}
+
+
 									if($checkdb['status']=='Confirmed'){
-										$ambilinfo = mysqli_query($conn,"select * from konfirmasi where orderid='$orderids'");
-										while($tarik=mysqli_fetch_array($ambilinfo)){		
-										$met = $tarik['payment'];
-										$namarek = $tarik['namarekening'];
-										$tglb = $tarik['tglbayar'];
+																	
 										echo '
-										Informasi Pembayaran
-									<div class="data-tables datatable-dark">
-									<table id="dataTable2" class="display" style="width:100%"><thead class="thead-dark">
-											<tr>
-												<th>Metode</th>
-												<th>Pemilik Rekening</th>
-												<th>Tanggal Pembayaran</th>
-												
-											</tr></thead><tbody>
-											<tr>
-											<td>'.$met.'</td>
-											<td>'.$namarek.'</td>
-											<td>'.$tglb.'</td>
-											</tr>
-											</tbody>
-										</table>
-									</div>
+									
 									<br><br>
 									<form method="post">
 									<input type="submit" name="kirim" class="form-control btn btn-success" value="Kirim" \>
 									</form>
 									';
-									}
 									;
 									} else {
 										echo '
