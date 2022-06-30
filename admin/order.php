@@ -259,15 +259,8 @@ if(isset($_POST['pembayaranbelumditerima']))
 										
                                     </div>
 									<br>
-									<?php
 									
-
-									$ambilinfo = mysqli_query($conn,"select * from konfirmasi where orderid='$orderids'");
-									while($tarik=mysqli_fetch_array($ambilinfo)){		
-									$met = $tarik['payment'];
-									$namarek = $tarik['namarekening'];
-									$tglb = $tarik['tglbayar'];
-									echo '
+								
 									Informasi Pembayaran
 								<div class="data-tables datatable-dark">
 								<table id="dataTable2" class="display" style="width:100%"><thead class="thead-dark">
@@ -277,16 +270,25 @@ if(isset($_POST['pembayaranbelumditerima']))
 											<th>Tanggal Pembayaran</th>
 											
 										</tr></thead><tbody>
+										<?php
+									
+
+									$ambilinfo = mysqli_query($conn,"select * from konfirmasi where orderid='$orderids'");
+									while($tarik=mysqli_fetch_array($ambilinfo)){		
+									$met = $tarik['payment'];
+									$namarek = $tarik['namarekening'];
+									$tglb = $tarik['tglbayar']; ?>
 										<tr>
-										<td>'.$met.'</td>
-										<td>'.$namarek.'</td>
-										<td>'.$tglb.'</td>
+										<td><?php echo $met ?></td>
+										<td><?php echo $namarek ?></td>
+										<td><?php echo $tglb ?></td>
 										</tr>
+										<?php } ?>
 										</tbody>
-									</table>
-								</div> ';}
+								</table>
+								</div>
 
-
+<?php
 									if($checkdb['status']=='Confirmed'){
 																	
 										echo '
