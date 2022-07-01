@@ -22,12 +22,13 @@ if(isset($_POST['hapusbarang'])){
 if(isset($_POST['updateproduk'])){
 	$namaproduk	= $_POST['namaproduk'];
 	$deskripsi = $_POST['deskripsi'];
+	$stock = $_POST['stock'];
 	$hargaafter = $_POST['hargaafter'];
     $hargabefore = $_POST['hargabefore'];
    
 	$idproduk = $_POST['idproduk'];
 
-	$queryupdate = mysqli_query($conn,"update produk set namaproduk='$namaproduk', deskripsi='$deskripsi', 
+	$queryupdate = mysqli_query($conn,"update produk set namaproduk='$namaproduk', deskripsi='$deskripsi', stock='$stock',
     hargaafter='$hargaafter', hargabefore='$hargabefore' where idproduk='$idproduk'");
 
 	if($queryupdate){

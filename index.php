@@ -218,8 +218,18 @@ include 'dbconnect.php';
 															for($n=1;$n<=$rate;$n++){
 																echo '<i class="fa fa-star blue-star" aria-hidden="true"></i>';
 															};
+															
 															?>
 															</div>
+															<h4>Stock: <?php 
+																if ($p['stock'] == ''){
+																	echo "Habis";
+																} elseif ($p['stock'] == 0){
+																	echo "Habis";
+																} else {
+																	echo number_format($p['stock']);
+																} ?>
+															</h4>
 															<h4>Rp<?php echo number_format($p['hargaafter']) ?> <span>Rp<?php echo number_format($p['hargabefore']) ?></span></h4>
 														</div>
 														<div class="snipcart-details top_brand_home_details">

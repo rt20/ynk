@@ -8,6 +8,7 @@ date_default_timezone_set("Asia/Bangkok");
 
 if(isset($_POST['kirim']))
 	{
+	
 		$updatestatus = mysqli_query($conn,"update cart set status='Pengiriman' where orderid='$orderids'");
 		$del =  mysqli_query($conn,"delete from konfirmasi where orderid='$orderids'");
 		
@@ -27,19 +28,35 @@ if(isset($_POST['kirim']))
 
 if(isset($_POST['selesai']))
 	{
-		$updatestatus = mysqli_query($conn,"update cart set status='Selesai' where orderid='$orderids'");
-		
-		if($updatestatus){
-			echo " <div class='alert alert-success'>
-			<center>Transaksi diselesaikan.</center>
-		  </div>
-		<meta http-equiv='refresh' content='1; url= manageorder.php'/>  ";
-		} else {
-			echo "<div class='alert alert-warning'>
-			Gagal Submit, silakan coba lagi
-		  </div>
-		 <meta http-equiv='refresh' content='1; url= manageorder.php'/> ";
-		}
+			$produk = mysqli_query($conn,"SELECT * from detailorder d, produk p where d.idproduk=p.idproduk AND orderid = '$orderids'");
+			while($p=mysqli_fetch_array($produk)){
+				if ($p['qty'] <= $p['stock']){
+					$idproduk = $p['idproduk'];
+					$result = $p['stock'] - $p['qty'];
+					$updateproduk = mysqli_query($conn,"update produk set stock='$result' where idproduk='$idproduk'");
+					$updatestatus = mysqli_query($conn,"update cart set status='Selesai' where orderid='$orderids'");
+				
+						if($updatestatus){
+							echo " <div class='alert alert-success'>
+							<center>Transaksi diselesaikan.</center>
+						</div>
+						<meta http-equiv='refresh' content='1; url= manageorder.php'/>  ";
+						} else {
+							echo "<div class='alert alert-warning'>
+							Gagal Submit, silakan coba lagi
+						</div>
+						<meta http-equiv='refresh' content='1; url= manageorder.php'/> ";
+						}
+
+
+					
+				} else{echo "<div class='alert alert-warning'>
+					Gagal, stock kurang
+				</div>
+				<meta http-equiv='refresh' content='1; url= manageorder.php'/> ";}
+			
+			}
+			
 		
 	};
 if(isset($_POST['pembayaranbelumditerima']))

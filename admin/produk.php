@@ -7,6 +7,7 @@
 		$idkategori=$_POST['idkategori'];
 		$deskripsi=$_POST['deskripsi'];
 		$rate=$_POST['rate'];
+		$stock=$_POST['stock'];
 		$hargabefore=$_POST['hargabefore'];
 		$hargaafter=$_POST['hargaafter'];
 		
@@ -24,8 +25,8 @@
 		  if($ukuran_file <= 5000000){ 
 			if(move_uploaded_file($tmp_file, $path)){ 
 			
-			  $query = "insert into produk (idkategori, namaproduk, gambar, deskripsi, rate, hargabefore, hargaafter)
-			  values('$idkategori','$namaproduk','$pathdb','$deskripsi','$rate','$hargabefore','$hargaafter')";
+			  $query = "insert into produk (idkategori, namaproduk, gambar, deskripsi, rate, stock, hargabefore, hargaafter)
+			  values('$idkategori','$namaproduk','$pathdb','$deskripsi','$rate', '$stock','$hargabefore','$hargaafter')";
 			  $sql = mysqli_query($conn, $query); // Eksekusi/ Jalankan query dari variabel $query
 			  
 			  if($sql){ 
@@ -208,6 +209,7 @@
 												<th>Harga Diskon</th>
 												<th>Deskripsi</th>
 												<th>Rate</th>
+												<th>Stock</th>
 												<th>Harga Awal</th>
 												<th>Tanggal</th>
 												<th>Aksi</th>
@@ -226,6 +228,7 @@
 												$hargaafter = $p['hargaafter'];
 												$deskripsi = $p['deskripsi'];
 												$rate = $p['rate'];
+												$stock = $p['stock'];
 												$hargabefore = $p['hargabefore'];
 												
 												?>
@@ -239,6 +242,7 @@
 												<td><?=$hargaafter;?></td>
 												<td><?=$deskripsi;?></td>
 												<td><?=$rate;?></td>
+												<td><?=$stock;?></td>
 												<td><?=$hargabefore;?></td>
 												<td><?=$tanggal;?></td>
 												<td>
@@ -271,6 +275,10 @@
 						<br>
 						Deskripsi
 						<input type="text" name="deskripsi" value="<?=$p['deskripsi'];?>" class="form-control" required>
+						<br>
+						Stock
+						<input type="number" name="stock" value="<?=$p['stock'];?>" class="form-control"
+							>
 						<br>
 						Harga Diskon
 						<input type="number" name="hargaafter" value="<?=$p['hargaafter'];?>" class="form-control"
@@ -377,6 +385,10 @@
 						<div class="form-group">
 							<label>Rating (1-5)</label>
 							<input name="rate" type="number" class="form-control" min="1" max="5" required>
+						</div>
+						<div class="form-group">
+							<label>Stock</label>
+							<input name="stock" type="number" class="form-control">
 						</div>
 						<div class="form-group">
 							<label>Harga Sebelum Diskon</label>
