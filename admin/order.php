@@ -28,14 +28,14 @@ if(isset($_POST['kirim']))
 
 if(isset($_POST['selesai']))
 	{
-			$produk = mysqli_query($conn,"SELECT * from detailorder d, produk p where d.idproduk=p.idproduk AND orderid = '$orderids'");
-			while($p=mysqli_fetch_array($produk)){
-				if ($p['qty'] <= $p['stock']){
-					$idproduk = $p['idproduk'];
-					$result = $p['stock'] - $p['qty'];
-					$updateproduk = mysqli_query($conn,"update produk set stock='$result' where idproduk='$idproduk'");
+			// $produk = mysqli_query($conn,"SELECT * from detailorder d, produk p where d.idproduk=p.idproduk AND orderid = '$orderids'");
+			// while($p=mysqli_fetch_array($produk)){
+			// 	if ($p['qty'] <= $p['stock']){
+			// 		$idproduk = $p['idproduk'];
+			// 		$result = $p['stock'] - $p['qty'];
+			// 		$updateproduk = mysqli_query($conn,"update produk set stock='$result' where idproduk='$idproduk'");
 					$updatestatus = mysqli_query($conn,"update cart set status='Selesai' where orderid='$orderids'");
-				
+			
 						if($updatestatus){
 							echo " <div class='alert alert-success'>
 							<center>Transaksi diselesaikan.</center>
@@ -46,16 +46,14 @@ if(isset($_POST['selesai']))
 							Gagal Submit, silakan coba lagi
 						</div>
 						<meta http-equiv='refresh' content='1; url= manageorder.php'/> ";
-						}
-
-
+						};
 					
-				} else{echo "<div class='alert alert-warning'>
-					Gagal, stock kurang
-				</div>
-				<meta http-equiv='refresh' content='1; url= manageorder.php'/> ";}
+	// 			} else{echo "<div class='alert alert-warning'>
+	// 				Gagal, stock kurang
+	// 			</div>
+	// 			<meta http-equiv='refresh' content='1; url= manageorder.php'/> ";}
 			
-			}
+	// 		}
 			
 		
 	};

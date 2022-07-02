@@ -19,14 +19,35 @@ if(!isset($_SESSION['log'])){
 if(isset($_POST["update"])){
 	$kode = $_POST['idproduknya'];
 	$jumlah = $_POST['jumlah'];
-	$q1 = mysqli_query($conn, "update detailorder set qty='$jumlah' where idproduk='$kode' and orderid='$orderidd'");
-	if($q1){
-		echo "Berhasil Update Cart
-		<meta http-equiv='refresh' content='1; url= cart.php'/>";
-	} else {
-		echo "Gagal update cart
-		<meta http-equiv='refresh' content='1; url= cart.php'/>";
+	$prod = mysqli_query($conn,"SELECT * from detailorder d, produk p where p.idproduk='$kode' AND orderid = '$orderidd'");
+	while($p=mysqli_fetch_array($prod)){
+		if ( $p['stock'] >= $jumlah ){
+			
+			$q1 = mysqli_query($conn, "update detailorder set qty='$jumlah' where idproduk='$kode' and orderid='$orderidd'");
+			echo "Berhasil Update Cart
+			<meta http-equiv='refresh' content='1; url= cart.php'/>";
+			// if($q1){
+			// 	echo "Berhasil Update Cart
+			// 	<meta http-equiv='refresh' content='1; url= cart.php'/>";
+			// } else {
+			// 	echo "Gagal update cart
+			// 	<meta http-equiv='refresh' content='1; url= cart.php'/>";
+			// };
+		} else {
+			echo "<div class='alert alert-warning'>
+			Gagal, stock kurang
+			</div>
+			<meta http-equiv='refresh' content='1; url= cart.php'/> ";
+		};
+	
 	}
+
+
+
+		
+
+
+
 } else if(isset($_POST["hapus"])){
 	$kode = $_POST['idproduknya'];
 	$q2 = mysqli_query($conn, "delete from detailorder where idproduk='$kode' and orderid='$orderidd'");

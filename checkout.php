@@ -16,15 +16,30 @@ if(!isset($_SESSION['log'])){
 	$itungtrans3 = $itungtrans2['jumlahtrans'];
 	
 if(isset($_POST["checkout"])){
+	$produk = mysqli_query($conn,"SELECT * from detailorder d, produk p where d.idproduk=p.idproduk AND orderid = '$orderidd'");
+	while($p=mysqli_fetch_array($produk)){
+	if ($p['qty'] <= $p['stock']){
+		$idproduk = $p['idproduk'];
+		$result = $p['stock'] - $p['qty'];
+		$updateproduk = mysqli_query($conn,"update produk set stock='$result' where idproduk='$idproduk'");
+		$q3 = mysqli_query($conn, "update cart set status='Payment' where orderid='$orderidd'");
+		if($q3){
+			echo "Berhasil Check Out
+			<meta http-equiv='refresh' content='1; url= index.php'/>";
+		} else {
+			echo "Gagal Check Out
+			<meta http-equiv='refresh' content='1; url= index.php'/>";
+		}
+		
+    } else {
+            echo "<div class='alert alert-warning'>
+				Gagal, stock kurang
+				</div>
+				<meta http-equiv='refresh' content='1; url= cart.php'/> ";}
+			
+			}
+
 	
-	$q3 = mysqli_query($conn, "update cart set status='Payment' where orderid='$orderidd'");
-	if($q3){
-		echo "Berhasil Check Out
-		<meta http-equiv='refresh' content='1; url= index.php'/>";
-	} else {
-		echo "Gagal Check Out
-		<meta http-equiv='refresh' content='1; url= index.php'/>";
-	}
 } else {
 	
 }

@@ -276,13 +276,29 @@ if(isset($_POST['addprod'])){
 					</div>
 					<div class="snipcart-item block">
 						<div class="snipcart-thumb agileinfo_single_right_snipcart">
+						<b> Stock: <?php 
+									if ($p['stock'] == ''){
+										echo "Habis";
+									} elseif ($p['stock'] == 0){
+												echo "Habis";
+									} else {
+											echo number_format($p['stock']);
+									} ?> </b>
 							<h4 class="m-sing">Rp<?php echo number_format($p['hargaafter']) ?> <span>Rp<?php echo number_format($p['hargabefore']) ?></span></h4>
 						</div>
 						<div class="snipcart-details agileinfo_single_right_details">
 							<form action="#" method="post">
 								<fieldset>
 									<input type="hidden" name="idprod" value="<?php echo $idproduk ?>">
-									<input type="submit" name="addprod" value="Add to cart" class="button">
+									<?php 
+									if ($p['stock'] == ''){
+									
+									} elseif ($p['stock'] == 0){
+												
+									} else {
+											echo '<input type="submit" name="addprod" value="Add to cart" class="button">';
+									} ?>
+									
 								</fieldset>
 							</form>
 						</div>
