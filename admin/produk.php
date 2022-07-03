@@ -17,8 +17,8 @@
 		$ukuran_file = $_FILES['uploadgambar']['size'];
 		$tipe_file = $_FILES['uploadgambar']['type'];
 		$tmp_file = $_FILES['uploadgambar']['tmp_name'];
-		$path = "../produk/".$random.'.'.$ext;
-		$pathdb = "produk/".$random.'.'.$ext;
+		$path = "./produk/".$random.'.'.$ext;
+		$pathdb = "./produk/".$random.'.'.$ext;
 
 
 		if($tipe_file == "image/jpeg" || $tipe_file == "image/png"){
