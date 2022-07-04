@@ -213,6 +213,15 @@ $idk = $_GET['idkategori'];
 											<div class="snipcart-thumb">
 												<a href="product.php?idproduk=<?php echo $p['idproduk'] ?>"><img src="<?php echo $p['gambar']?>" width="200px" height="200px"></a>		
 												<p><?php echo $p['namaproduk'] ?></p>
+												<h4><b>Stock: <?php 
+																if ($p['stock'] == ''){
+																	echo "Habis";
+																} elseif ($p['stock'] == 0){
+																	echo "Habis";
+																} else {
+																	echo number_format($p['stock']);
+																} ?>
+															</b></h4>
 												<h4>Rp<?php echo number_format($p['hargaafter']) ?> <span>Rp<?php echo number_format($p['hargabefore']) ?></span></h4>
 											</div>
 											<div class="snipcart-details top_brand_home_details">
